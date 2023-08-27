@@ -8,7 +8,7 @@ const Home = () => {
       <section>
         <p>I am</p>
         <h1>Martin Pandarski</h1>
-        <h3>{">"} Frontend Developer</h3>
+        <h2>{">"} Frontend Developer</h2>
         <span>// try to complete the game &#128527; </span>
         <Highlight className="javascript">
           {"const githubLink = 'https://github.com/example/url'"}
