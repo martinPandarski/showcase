@@ -43,6 +43,10 @@ const Board: React.FC<BoardProps> = ({ aiPlayer, humanPlayer }) => {
       }
     }
 
+    if (calculateTie(squares)) {
+      return "Tie";
+    }
+
     return null;
   };
 
@@ -134,8 +138,8 @@ const Board: React.FC<BoardProps> = ({ aiPlayer, humanPlayer }) => {
     setXIsNext(false);
   };
   const winner = calculateWinner(squares);
-  const status: string = winner === "O" ? "GAME OVER" : "WELL DONE!";
-
+  const status: string =
+    winner === "Tie" ? "Tie!" : winner === "O" ? "GAME OVER" : "WELL DONE!";
   return (
     <div className="board-wrap">
       <Bolt className="top-left" />
