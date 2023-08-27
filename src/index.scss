@@ -1,0 +1,67 @@
+$primaryColor1: #01080e;
+$primaryColor2: #011627;
+$primaryColor3: #011221;
+
+$secondaryColor1: #607b96;
+$secondaryColor2: #3c9d93;
+$secondaryColor3: #4d5bce;
+$secondaryColor4: #ffffff;
+
+$accentColor1: #fea55f;
+$accentColor2: #43d9ad;
+$accentColor3: #e99287;
+$accentColor4: #c98bdf;
+
+$lineColor: #1e2d3d;
+
+$gradient1: #4d5bce;
+$gradient2: #43d9ad;
+
+body {
+  font-family: "Fira Code", monospace;
+
+  background-color: $primaryColor2;
+  margin: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1450px;
+  margin: 0 auto;
+  min-height: calc(100vh - 60px);
+}
+
+h1 {
+  color: #fff;
+  font-size: 62px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: normal;
+}
+
+h3 {
+  color: #fff;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+p {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
+  font-style: normal;
+}
+
+span {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  font-style: normal;
+}

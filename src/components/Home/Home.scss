@@ -1,0 +1,24 @@
+@import "../../index.scss";
+
+.page-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    h1 {
+      margin: 0;
+    }
+    h3 {
+      color: $secondaryColor3;
+    }
+    span {
+      color: $secondaryColor1;
+    }
+  }
+}
