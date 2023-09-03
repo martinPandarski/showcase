@@ -1,11 +1,19 @@
 @import "../../index.scss";
 
 .page-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
   width: 100%;
+
+  margin: 0 auto;
+  height: 100%;
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 20px;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
 
   section {
     display: flex;
