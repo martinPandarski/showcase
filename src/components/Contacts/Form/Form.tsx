@@ -5,7 +5,14 @@ interface FormComponentProps {
   updateCodeRepresentation: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const encode = (data) => {
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+  [key: string]: string;
+}
+
+const encode = (data: FormData) => {
   return Object.keys(data)
     .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
     .join("&");
