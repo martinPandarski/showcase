@@ -5,18 +5,18 @@ interface FormComponentProps {
   updateCodeRepresentation: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-// interface FormData {
-//   name: string;
-//   email: string;
-//   message: string;
-//   [key: string]: string;
-// }
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+  [key: string]: string;
+}
 
-// const encode = (data: FormData) => {
-//   return Object.keys(data)
-//     .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-//     .join("&");
-// };
+const encode = (data: FormData) => {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+};
 
 const FormComponent: React.FC<FormComponentProps> = ({
   updateCodeRepresentation,
@@ -28,21 +28,21 @@ const FormComponent: React.FC<FormComponentProps> = ({
         email: "",
         message: "",
       }}
-      onSubmit={(values) => {
+      onSubmit={(values, actions) => {
         console.log("v", values);
-        // fetch("/", {
-        //   method: "POST",
-        //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        //   body: encode({ "form-name": "contact", ...values }),
-        // })
-        //   .then(() => {
-        //     alert("Success");
-        //     actions.resetForm();
-        //   })
-        //   .catch(() => {
-        //     alert("Error");
-        //   })
-        //   .finally(() => actions.setSubmitting(false));
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: encode({ "form-name": "contact", ...values }),
+        })
+          .then(() => {
+            alert("Success");
+            actions.resetForm();
+          })
+          .catch(() => {
+            alert("Error");
+          })
+          .finally(() => actions.setSubmitting(false));
       }}
       //   validate={(values) => {
       //     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;

@@ -18,6 +18,18 @@
     <link rel="stylesheet" href="/prism.scss" />
   </head>
   <body>
+    <form
+      name="contact"
+      netlify
+      netlify-honeypot="bot-field"
+      action="/contacts"
+      hidden
+    >
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+    </form>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script src="/prism.js"></script>
