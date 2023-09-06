@@ -65,12 +65,8 @@ const FormComponent: React.FC<FormComponentProps> = ({
     >
       {({ isSubmitting, handleChange }) => (
         //@ts-ignore
-        <Form
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
-          name="contact"
-        >
-          <Field type="hidden" name="form-name" />
+        <Form netlify data-netlify-honeypot="bot-field" name="contact" hidden>
+          <Field type="hidden" name="form-name" value="contact" />
           <Field type="hidden" name="bot-field" />
           <div className="form-group">
             <label htmlFor="name">_name:</label>
