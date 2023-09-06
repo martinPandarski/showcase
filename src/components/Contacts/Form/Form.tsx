@@ -44,24 +44,24 @@ const FormComponent: React.FC<FormComponentProps> = ({
           })
           .finally(() => actions.setSubmitting(false));
       }}
-      validate={(values) => {
-        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-        const errors = {
-          name: "",
-          email: "",
-          message: "",
-        };
-        if (!values.name) {
-          errors.name = "Name Required";
-        }
-        if (!values.email || !emailRegex.test(values.email)) {
-          errors.email = "Valid Email Required";
-        }
-        if (!values.message) {
-          errors.message = "Message Required";
-        }
-        return errors;
-      }}
+      //   validate={(values) => {
+      //     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+      //     const errors = {
+      //       name: "",
+      //       email: "",
+      //       message: "",
+      //     };
+      //     if (!values.name) {
+      //       errors.name = "Name Required";
+      //     }
+      //     if (!values.email || !emailRegex.test(values.email)) {
+      //       errors.email = "Valid Email Required";
+      //     }
+      //     if (!values.message) {
+      //       errors.message = "Message Required";
+      //     }
+      //     return errors;
+      //   }}
     >
       {({ isSubmitting, handleChange }) => (
         //@ts-ignore
