@@ -1,0 +1,51 @@
+@import "../../index.scss";
+.contacts-wrapper {
+  display: grid;
+  grid-template-columns: 350px auto;
+  grid-template-areas: "left center";
+  width: 100%;
+  height: 100%;
+  .info-panel {
+    grid-area: left;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    border-width: 0 1px;
+    border-style: solid;
+    border-color: $lineColor;
+
+    .upper {
+      display: flex;
+      gap: 5px;
+      width: 100%;
+      padding: 10px;
+      &:first-of-type {
+        border-bottom: 1px solid $lineColor;
+      }
+    }
+  }
+  .right {
+    grid-area: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .snippet {
+      display: flex;
+      flex-direction: column;
+      .line {
+        display: flex;
+        gap: 40px;
+        align-items: center;
+        padding: 0 20px;
+        .index {
+          color: $secondaryColor1;
+        }
+        pre {
+          padding: 0;
+          margin: 0;
+        }
+      }
+    }
+  }
+}

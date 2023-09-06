@@ -39,7 +39,14 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-      <span>_contact me</span>
+      <NavLink
+        to="/contacts"
+        className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? "active" : ""
+        }
+      >
+        _contacts
+      </NavLink>
     </header>
   );
 };

@@ -9,15 +9,17 @@ header {
 
   span {
     color: $secondaryColor1;
-    &:last-of-type,
-    &:first-of-type {
-      padding: 0 20px;
-    }
-    &:first-of-type {
-      grid-area: left;
-    }
-    &:last-of-type {
-      grid-area: right;
+    padding: 0 20px;
+    grid-area: left;
+  }
+
+  a {
+    padding: 15px 20px;
+
+    text-decoration: none;
+    color: $secondaryColor1;
+    &.active {
+      border-bottom: 2px solid $accentColor1;
     }
   }
   nav {
@@ -41,15 +43,6 @@ header {
         border-color: $lineColor;
         border-style: solid;
         display: flex;
-        a {
-          padding: 15px 20px;
-
-          text-decoration: none;
-          color: $secondaryColor1;
-          &.active {
-            border-bottom: 2px solid $accentColor1;
-          }
-        }
       }
     }
   }

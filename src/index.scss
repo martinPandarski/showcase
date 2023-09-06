@@ -63,3 +63,47 @@ span {
   line-height: normal;
   font-style: normal;
 }
+
+button {
+  border-radius: 8px;
+  background: #1c2b3a;
+
+  color: $secondaryColor4;
+  font-size: 14px;
+  font-weight: 450;
+
+  max-width: 146px;
+  padding: 10px 14px;
+}
+
+label {
+  color: $secondaryColor1;
+}
+input {
+  height: 41px;
+}
+input,
+textarea {
+  background-color: $primaryColor3;
+  border-radius: 8px;
+  border: 1px solid $lineColor;
+  outline: none;
+  color: #465e77;
+  padding: 10px;
+  font-size: 16px;
+
+  &:focus,
+  &:focus-visible {
+    border: 1px solid $secondaryColor1;
+    box-shadow: 0px 0px 0px 2px rgba(96, 123, 150, 0.3);
+  }
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #465e77;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: none;
+}

@@ -1,0 +1,15 @@
+@import "../../../index.scss";
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 630px;
+  width: 100%;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
