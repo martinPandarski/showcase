@@ -28,21 +28,21 @@ const FormComponent: React.FC<FormComponentProps> = ({
         email: "",
         message: "",
       }}
-      onSubmit={(values, actions) => {
-        console.log("v", values);
-        fetch("/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: encode({ "form-name": "contact", ...values }),
-        })
-          .then(() => {
-            alert("Success");
-            actions.resetForm();
-          })
-          .catch(() => {
-            alert("Error");
-          })
-          .finally(() => actions.setSubmitting(false));
+      onSubmit={(_values, _actions) => {
+        // console.log("v", values);
+        // fetch("/", {
+        //   method: "POST",
+        //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        //   body: encode({ "form-name": "contact", ...values }),
+        // })
+        //   .then(() => {
+        //     alert("Success");
+        //     actions.resetForm();
+        //   })
+        //   .catch(() => {
+        //     alert("Error");
+        //   })
+        //   .finally(() => actions.setSubmitting(false));
       }}
       //   validate={(values) => {
       //     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -64,8 +64,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
       //   }}
     >
       {({ isSubmitting, handleChange }) => (
-        //@ts-ignore
-        <Form netlify data-netlify-honeypot="bot-field" name="contact" hidden>
+        <Form name="contact" method="POST">
           <Field type="hidden" name="form-name" value="contact" />
           <Field type="hidden" name="bot-field" />
           <div className="form-group">
