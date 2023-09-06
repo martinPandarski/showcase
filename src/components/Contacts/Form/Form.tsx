@@ -1,6 +1,6 @@
-import { Form, Formik, Field, ErrorMessage, FormikHelpers } from "formik";
 import "./Form.scss";
-import { createRef } from "react";
+import { useState } from "react";
+import { Form, Formik, Field, ErrorMessage, FormikHelpers } from "formik";
 import ReCAPTCHA from "react-google-recaptcha";
 import { object, string } from "yup";
 
@@ -31,9 +31,7 @@ const FormSchema = object().shape({
 const FormComponent: React.FC<FormComponentProps> = ({
   updateCodeRepresentation,
 }) => {
-  const recaptchaRef = createRef<ReCAPTCHA>();
-  const recaptchaValue = recaptchaRef.current?.getValue();
-
+  const [token, setToken] = useState("");
   const handleSubmit = async (
     values: FormData,
     actions: FormikHelpers<FormData>
@@ -45,7 +43,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: encode({
           "form-name": "contact",
-          ...(recaptchaValue ? { "g-recaptcha-response": recaptchaValue } : {}),
+          ...(token ? { "g-recaptcha-response": token } : {}),
           ...values,
         }),
       });
@@ -116,15 +114,16 @@ const FormComponent: React.FC<FormComponentProps> = ({
                   <ErrorMessage name="message" component="div" />
                 </div>
                 <ReCAPTCHA
-                  ref={recaptchaRef}
                   sitekey={RECAPTCHA_KEY}
                   size="normal"
                   id="recaptcha-google"
+                  onChange={(token) => {
+                    if (token) {
+                      setToken(token);
+                    }
+                  }}
                 />
-                <button
-                  disabled={isSubmitting || !recaptchaValue}
-                  type="submit"
-                >
+                <button disabled={isSubmitting || !token} type="submit">
                   submit-message
                 </button>
               </Form>
