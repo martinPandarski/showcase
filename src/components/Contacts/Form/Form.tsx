@@ -1,7 +1,8 @@
-import { Form, Formik, Field, ErrorMessage } from "formik";
+import { Form, Formik, Field, ErrorMessage, FormikHelpers } from "formik";
 import "./Form.scss";
 import { createRef } from "react";
-import Recaptcha from "react-google-recaptcha";
+import ReCAPTCHA from "react-google-recaptcha";
+import { object, string } from "yup";
 
 const RECAPTCHA_KEY = "6LcpYAQoAAAAAElLP-DdbSBLZsBt3ibZl6jlm6lT";
 interface FormComponentProps {
@@ -21,33 +22,47 @@ const encode = (data: FormData) => {
     .join("&");
 };
 
+const FormSchema = object().shape({
+  name: string().required("Name is required"),
+  message: string().required("Message is required"),
+  email: string().email("Invalid email").required("Email is required"),
+});
+
 const FormComponent: React.FC<FormComponentProps> = ({
   updateCodeRepresentation,
 }) => {
-  const recaptchaRef = createRef<any>();
+  const recaptchaRef = createRef<ReCAPTCHA>();
+  const recaptchaValue = recaptchaRef.current?.getValue();
 
-  const handleSubmit = (values: any, actions: any) => {
-    const recaptchaValue = recaptchaRef.current.getValue();
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({
-        "form-name": "contact",
-        "g-recaptcha-response": recaptchaValue,
-        ...values,
-      }),
-    })
-      .then(() => {
-        alert("Success");
+  const handleSubmit = async (
+    values: FormData,
+    actions: FormikHelpers<FormData>
+  ) => {
+    try {
+      actions.setSubmitting(true);
+      const result = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({
+          "form-name": "contact",
+          ...(recaptchaValue ? { "g-recaptcha-response": recaptchaValue } : {}),
+          ...values,
+        }),
+      });
+      if (result.status === 200) {
         actions.resetForm();
-      })
-      .catch(() => {
-        alert("Error");
-      })
-      .finally(() => actions.setSubmitting(false));
+        actions.setSubmitting(false);
+        actions.setStatus("sent");
+      }
+    } catch {
+      alert("Error");
+    } finally {
+      actions.setSubmitting(false);
+    }
   };
+
   return (
-    <>
+    <div className="form-wrapper">
       <Formik
         initialValues={{
           name: "",
@@ -55,80 +70,81 @@ const FormComponent: React.FC<FormComponentProps> = ({
           message: "",
         }}
         onSubmit={handleSubmit}
-        validate={(values) => {
-          const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-          const errors = {
-            name: "",
-            email: "",
-            message: "",
-          };
-          if (!values.name) {
-            errors.name = "Name Required";
-          }
-          if (!values.email || !emailRegex.test(values.email)) {
-            errors.email = "Valid Email Required";
-          }
-          if (!values.message) {
-            errors.message = "Message Required";
-          }
-          return errors;
-        }}
+        validationSchema={FormSchema}
       >
-        {({ isSubmitting, handleChange }) => (
-          <Form name="contact" method="POST" className="form">
-            <Field type="hidden" name="form-name" value="contact" />
-            <Field type="hidden" name="bot-field" />
-            <div className="form-group">
-              <label htmlFor="name">_name:</label>
-              <Field
-                name="name"
-                type="text"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  updateCodeRepresentation(e);
-                  handleChange(e);
-                }}
-              />
-              <ErrorMessage name="name" component="div" />
+        {({ isSubmitting, handleChange, status, setStatus }) => {
+          if (status !== "sent") {
+            return (
+              <Form name="contact" method="POST" className="form">
+                <Field type="hidden" name="form-name" value="contact" />
+                <Field type="hidden" name="bot-field" />
+                <div className="form-group">
+                  <label htmlFor="name">_name:</label>
+                  <Field
+                    name="name"
+                    type="text"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      updateCodeRepresentation(e);
+                      handleChange(e);
+                    }}
+                  />
+                  <ErrorMessage name="name" component="div" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email">_email:</label>
+                  <Field
+                    name="email"
+                    type="email"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      updateCodeRepresentation(e);
+                      handleChange(e);
+                    }}
+                  />
+                  <ErrorMessage name="email" component="div" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="message">_message:</label>
+                  <Field
+                    name="message"
+                    as="textarea"
+                    rows="4"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      updateCodeRepresentation(e);
+                      handleChange(e);
+                    }}
+                  />
+                  <ErrorMessage name="message" component="div" />
+                </div>
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  sitekey={RECAPTCHA_KEY}
+                  size="normal"
+                  id="recaptcha-google"
+                />
+                <button
+                  disabled={isSubmitting || !recaptchaValue}
+                  type="submit"
+                >
+                  submit-message
+                </button>
+              </Form>
+            );
+          }
+          return (
+            <div className="success">
+              <div>Thank You! 🤘</div>
+              <p>
+                Your message has been accepted. You will recieve answer really
+                soon!
+              </p>
+              <button onClick={() => setStatus("initial")}>
+                send-new-message
+              </button>
             </div>
-            <div className="form-group">
-              <label htmlFor="email">_email:</label>
-              <Field
-                name="email"
-                type="email"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  updateCodeRepresentation(e);
-                  handleChange(e);
-                }}
-              />
-              <ErrorMessage name="email" component="div" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="message">_message:</label>
-              <Field
-                name="message"
-                as="textarea"
-                rows="4"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  updateCodeRepresentation(e);
-                  handleChange(e);
-                }}
-              />
-              <ErrorMessage name="message" component="div" />
-            </div>
-
-            <button disabled={isSubmitting} type="submit">
-              submit-message
-            </button>
-          </Form>
-        )}
+          );
+        }}
       </Formik>
-      <Recaptcha
-        ref={recaptchaRef}
-        sitekey={RECAPTCHA_KEY}
-        size="normal"
-        id="recaptcha-google"
-      />
-    </>
+    </div>
   );
 };
 
