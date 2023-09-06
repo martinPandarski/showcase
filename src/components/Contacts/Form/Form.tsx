@@ -33,7 +33,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
         fetch("/", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: encode({ "form-name": "contact-form", ...values }),
+          body: encode({ "form-name": "contact", ...values }),
         })
           .then(() => {
             alert("Success");
@@ -65,7 +65,13 @@ const FormComponent: React.FC<FormComponentProps> = ({
     >
       {({ isSubmitting, handleChange }) => (
         //@ts-ignore
-        <Form data-netlify="true" name="contact-form">
+        <Form
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          name="contact"
+        >
+          <Field type="hidden" name="form-name" />
+          <Field type="hidden" name="bot-field" />
           <div className="form-group">
             <label htmlFor="name">_name:</label>
             <Field
