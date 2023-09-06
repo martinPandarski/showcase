@@ -5,18 +5,18 @@ interface FormComponentProps {
   updateCodeRepresentation: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-interface FormData {
-  name: string;
-  email: string;
-  message: string;
-  [key: string]: string;
-}
+// interface FormData {
+//   name: string;
+//   email: string;
+//   message: string;
+//   [key: string]: string;
+// }
 
-const encode = (data: FormData) => {
-  return Object.keys(data)
-    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&");
-};
+// const encode = (data: FormData) => {
+//   return Object.keys(data)
+//     .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+//     .join("&");
+// };
 
 const FormComponent: React.FC<FormComponentProps> = ({
   updateCodeRepresentation,
@@ -28,8 +28,8 @@ const FormComponent: React.FC<FormComponentProps> = ({
         email: "",
         message: "",
       }}
-      onSubmit={(_values, _actions) => {
-        // console.log("v", values);
+      onSubmit={(values) => {
+        console.log("v", values);
         // fetch("/", {
         //   method: "POST",
         //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
