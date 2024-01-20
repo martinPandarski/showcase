@@ -12,6 +12,9 @@ export default defineConfig({
       gtm: {
         id: "GTM-P2VZSB3H",
       },
+      analytics: {
+        id: "G-HVF0M33ZBS",
+      },
     }),
   ],
 });
