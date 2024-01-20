@@ -93,7 +93,7 @@ const presentation: PresentationContent = {
   personal: {
     bio: [
       "// About me",
-      "// I have about 2 years of experience in web development",
+      "// I have about 3 years of experience in web development",
       "// and I mainly specialize in web development with React",
       "// however I have worked on a couple of projects with NuxtJS and React Native.",
       "// I am constantly trying to perfect my skills by learning",
@@ -116,7 +116,7 @@ const presentation: PresentationContent = {
   professional: {
     bio: [
       "// About me",
-      "// I have about 2 years of experience in web development",
+      "// I have about 3 years of experience in web development",
       "// and I mainly specialize in web development with React",
       "// however I have worked on a couple of projects with NuxtJS and React Native.",
       "// I am constantly trying to perfect my skills by learning",

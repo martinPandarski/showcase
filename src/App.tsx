@@ -8,16 +8,14 @@ import Contacts from "./components/Contacts/Contacts";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <main>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contacts" element={<Contacts />} />
-        </Routes>
-      </main>
-    </div>
+    <main>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contacts" element={<Contacts />} />
+      </Routes>
+    </main>
   );
 };
 

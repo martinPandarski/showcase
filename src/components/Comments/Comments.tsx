@@ -7,7 +7,7 @@ const Comments = ({ code }: { code: string }) => {
   }, []);
   return (
     <pre>
-      <code className="language-javascript">{code}</code>
+      <code className="language-javascript code">{code}</code>
     </pre>
   );
 };

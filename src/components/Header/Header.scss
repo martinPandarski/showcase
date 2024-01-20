@@ -1,16 +1,22 @@
 @import "../../index.scss";
 header {
-  display: grid;
-  grid-template-columns: 350px auto 150px;
-  grid-template-areas: "left center right";
   align-items: center;
 
   border-bottom: 1px solid $lineColor;
 
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: auto 1fr !important;
+  }
+
+  .hamburger-react,
   span {
     color: $secondaryColor1;
+  }
+  .hamburger-react {
+    justify-self: flex-end;
+  }
+  span {
     padding: 0 20px;
-    grid-area: left;
   }
 
   a {
@@ -23,10 +29,6 @@ header {
     }
   }
   nav {
-    grid-area: center;
-    height: 100%;
-    border-right: 1px solid $lineColor;
-
     ul {
       height: 100%;
 
@@ -43,6 +45,16 @@ header {
         border-color: $lineColor;
         border-style: solid;
         display: flex;
+      }
+      @media screen and (max-width: 1024px) {
+        flex-direction: column;
+        li {
+          width: 100%;
+
+          &:not(:first-of-type) {
+            border-width: 1px 0;
+          }
+        }
       }
     }
   }

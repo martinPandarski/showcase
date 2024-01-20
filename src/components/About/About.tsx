@@ -19,7 +19,7 @@ const About = () => {
   const [selectedSubSection, setSelectedSubsection] = useState("");
   const [expandedSection, setExpandSection] = useState("");
   return (
-    <div className="about-wrapper">
+    <div className="about-wrapper grid-container">
       <div className="info-panel">
         <div className="info-sections">
           <ProfessionalInfoIcon
