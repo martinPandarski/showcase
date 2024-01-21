@@ -13,7 +13,7 @@ export default defineConfig({
         id: "GTM-P2VZSB3H",
       },
       analytics: {
-        id: "G-HVF0M33ZBS",
+        id: "G-P0C0FT308M",
       },
     }),
   ],
