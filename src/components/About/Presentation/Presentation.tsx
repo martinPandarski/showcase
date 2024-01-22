@@ -12,7 +12,7 @@ const Presentation = ({
   return (
     <div className="presentation-container">
       <div className="selection">
-        <div>{selectedSection}</div>
+        <div>{selectedSubSection}</div>
       </div>
       <div className="inner">
         {presentation[selectedSection]?.[selectedSubSection]?.map(

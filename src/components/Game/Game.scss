@@ -112,12 +112,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 24px;
-  width: 100%;
-  background: rgba(1, 22, 39, 0.94);
-  box-shadow: 1px 5px 11px 0px rgba(2, 18, 27, 0.71) inset;
 
-  color: $accentColor2;
+  width: 100%;
+  p {
+    background: rgba(1, 22, 39, 0.94);
+    font-size: 24px;
+    box-shadow: 1px 5px 11px 0px rgba(2, 18, 27, 0.71) inset;
+    color: $accentColor2;
+    padding: 10px 0;
+  }
+
   text-align: center;
-  padding: 10px 0;
 }

@@ -7,11 +7,10 @@ interface BoardProps {
   aiPlayer: string;
   humanPlayer: string;
 }
+const initialSquares = Array(9).fill(null);
 
 const Board: React.FC<BoardProps> = ({ aiPlayer, humanPlayer }) => {
-  const [squares, setSquares] = useState<(string | null)[]>(
-    Array(9).fill(null)
-  );
+  const [squares, setSquares] = useState<(string | null)[]>(initialSquares);
   const [xIsNext, setXIsNext] = useState<boolean>(true);
 
   useEffect(() => {
@@ -144,7 +143,16 @@ const Board: React.FC<BoardProps> = ({ aiPlayer, humanPlayer }) => {
     <div className="board-wrap">
       <Bolt className="top-left" />
       <Bolt className="top-right" />
-      {winner && <div className="status">{status}</div>}
+      {winner && (
+        <>
+          <div className="status">
+            <p>{status}</p>
+            <button onClick={() => setSquares(initialSquares)}>
+              play-again
+            </button>
+          </div>
+        </>
+      )}
       <div className="board">
         {squares.map((square, index) => (
           <Square

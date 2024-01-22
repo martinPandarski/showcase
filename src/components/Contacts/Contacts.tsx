@@ -38,7 +38,7 @@ const Contacts: React.FC = () => {
     });
   };
   return (
-    <div className="contacts-wrapper grid-container">
+    <div className="contacts-wrapper layout-container">
       <div className="info-panel">
         <div className="upper">
           <div>

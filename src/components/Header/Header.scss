@@ -1,11 +1,14 @@
 @import "../../index.scss";
 header {
+  display: grid;
+  grid-template-columns: minmax(0, 350px) 1fr auto;
+
   align-items: center;
 
   border-bottom: 1px solid $lineColor;
 
   @media screen and (max-width: 1024px) {
-    grid-template-columns: auto 1fr !important;
+    grid-template-columns: auto 1fr;
   }
 
   .hamburger-react,

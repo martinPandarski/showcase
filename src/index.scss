@@ -131,11 +131,15 @@ input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
   box-shadow: none;
 }
+pre.language-javascript {
+  overflow: hidden;
+}
 
-.grid-container {
+.layout-container {
   display: grid;
   grid-template-columns: minmax(0, 350px) 1fr auto;
   @media screen and (max-width: 1024px) {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
   }
 }

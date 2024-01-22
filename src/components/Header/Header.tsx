@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import "./Header.scss";
 import { NavLink } from "react-router-dom";
 import { useIsMobile } from "../../hooks";
-import { Rotate as HamburgerIcon } from "hamburger-react";
+import { Sling as HamburgerIcon } from "hamburger-react";
 import Sidebar from "../Sidebar/Sidebar";
 
 const Header = () => {
@@ -14,7 +14,7 @@ const Header = () => {
   };
 
   return (
-    <header className="grid-container">
+    <header>
       <span>martin pandarski</span>
       {isMobile && (
         <HamburgerIcon
@@ -67,7 +67,7 @@ const Nav: FC<NavProps> = ({ onClose }) => {
             _about-me
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink
             to="/projects"
             className={({ isActive, isPending }) =>
@@ -77,7 +77,7 @@ const Nav: FC<NavProps> = ({ onClose }) => {
           >
             _projects
           </NavLink>
-        </li>
+        </li> */}
         <li>
           <NavLink
             to="/contacts"

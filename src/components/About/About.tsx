@@ -5,30 +5,33 @@ import { ReactComponent as ProfessionalInfoIcon } from "../../assets/professiona
 import { ReactComponent as PersonalInfoIcon } from "../../assets/personal-info.svg";
 import { ReactComponent as CategoryIcon } from "../../assets/category-arrow.svg";
 import { ReactComponent as ArrowIcon } from "../../assets/arrow.svg";
-import { ReactComponent as EmailIcon } from "../../assets/email.svg";
-import { ReactComponent as PhoneIcon } from "../../assets/phone.svg";
 
-import "./About.scss";
 import { categoryContent } from "../../content/content";
 import Presentation from "./Presentation/Presentation";
+import "./About.scss";
 
 const About = () => {
   const [selectedSection, setSelectedSection] = useState<
     "personal" | "professional"
   >("personal");
-  const [selectedSubSection, setSelectedSubsection] = useState("");
+  const [selectedSubSection, setSelectedSubsection] = useState("personal");
   const [expandedSection, setExpandSection] = useState("");
+
+  const handleSelection = (selection: "personal" | "professional") => {
+    setSelectedSection(selection);
+    setSelectedSubsection(selection);
+  };
   return (
-    <div className="about-wrapper grid-container">
+    <div className="about-wrapper layout-container">
       <div className="info-panel">
         <div className="info-sections">
           <ProfessionalInfoIcon
             className={selectedSection === "professional" ? "active" : ""}
-            onClick={() => setSelectedSection("professional")}
+            onClick={() => handleSelection("professional")}
           />
           <PersonalInfoIcon
             className={selectedSection === "personal" ? "active" : ""}
-            onClick={() => setSelectedSection("personal")}
+            onClick={() => handleSelection("personal")}
           />
         </div>
         <div className="categories">
@@ -94,18 +97,6 @@ const About = () => {
                   );
                 }
               )}
-            </div>
-            <div className="upper">
-              <CategoryIcon />
-              <span>contacts</span>
-            </div>
-            <div className="contacts">
-              <EmailIcon />
-              <span>martinpandarski@gmail.com</span>
-            </div>
-            <div className="contacts">
-              <PhoneIcon />
-              <span>+359886235381</span>
             </div>
           </div>
         </div>
