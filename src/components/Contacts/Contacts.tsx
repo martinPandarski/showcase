@@ -1,73 +1,98 @@
-import "./Contacts.scss";
-import { ReactComponent as CategoryIcon } from "../../assets/category-arrow.svg";
-import { ReactComponent as EmailIcon } from "../../assets/email.svg";
-import { ReactComponent as PhoneIcon } from "../../assets/phone.svg";
-import FormComponent from "./Form/Form";
-import { useState } from "react";
-import Comments from "../Comments/Comments";
+import { motion } from "motion/react";
+import PageWrap from "../PageWrap";
+import ContactForm from "./ContactForm";
 
-const initialCodeRepresentation = [
-  "const sendBtn = document.querySelector('#sendBtn');",
-  "",
-  "const message = {",
-  " name: '',",
-  " email: '',",
-  " message: '',",
-  "}",
-  "",
-  "sendBtn.addEventListener('click', () => { form.send(message); })",
-];
-const Contacts: React.FC = () => {
-  const [codeRepresentation, setCodeRepresentation] = useState<string[]>(
-    initialCodeRepresentation
-  );
-
-  const updateCodeRepresentation = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-    setCodeRepresentation((prevCodeRepresentation) => {
-      const updatedCode = [...prevCodeRepresentation];
-      const fieldIndex = updatedCode.findIndex((line) =>
-        line.includes(`${name}:`)
-      );
-
-      if (fieldIndex !== -1) {
-        updatedCode[fieldIndex] = ` ${name}: '${value}',`;
-      }
-
-      return updatedCode;
-    });
-  };
-  return (
-    <div className="contacts-wrapper layout-container">
-      <div className="info-panel">
-        <div className="upper">
-          <div>
-            <CategoryIcon />
-          </div>
-          <span>contacts</span>
-        </div>
-        <div className="upper">
-          <EmailIcon />
-          <span>martinpandarski@gmail.com</span>
-        </div>
-        <div className="upper">
-          <PhoneIcon />
-          <span>+359886235381</span>
-        </div>
-      </div>
-      <div className="right">
-        <FormComponent updateCodeRepresentation={updateCodeRepresentation} />
-        <div className="snippet">
-          {codeRepresentation?.map((line: string, index: number) => (
-            <div key={index} className="line">
-              <span className="index">{index + 1}</span>
-              <Comments code={line} />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+const fadeUp = {
+  initial: { opacity: 0, y: 28 },
+  animate: { opacity: 1, y: 0 },
 };
+
+const Contacts: React.FC = () => (
+  <PageWrap>
+    <section id="contact" className="px-6 md:px-10 pt-32 pb-12">
+      <div className="grid md:grid-cols-12 gap-12">
+        <div className="md:col-span-6">
+          <motion.div
+            {...fadeUp}
+            transition={{ duration: 0.6 }}
+            className="mono text-xs uppercase tracking-[0.3em] text-muted mb-8"
+          >
+            (contact) Open for collaborations
+          </motion.div>
+          <motion.h2
+            {...fadeUp}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="display text-[14vw] md:text-[9vw] leading-[0.85]"
+          >
+            <span className="font-extralight">Let's build</span>
+            <br />
+            <span className="font-semibold">something</span>
+            <span className="text-flame">.</span>
+          </motion.h2>
+
+          <motion.div
+            {...fadeUp}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-16 space-y-6 mono text-sm"
+          >
+            <div>
+              <div className="text-muted uppercase tracking-[0.25em] text-[11px] mb-2">
+                Email
+              </div>
+              <a
+                href="mailto:martinpandarski@gmail.com"
+                className="text-ink text-lg hover:text-flame transition"
+              >
+                martinpandarski@gmail.com
+              </a>
+            </div>
+            <div>
+              <div className="text-muted uppercase tracking-[0.25em] text-[11px] mb-2">
+                Phone
+              </div>
+              <a
+                href="tel:+359886235381"
+                className="text-ink text-lg hover:text-flame transition"
+              >
+                +359 886 235 381
+              </a>
+            </div>
+            <div>
+              <div className="text-muted uppercase tracking-[0.25em] text-[11px] mb-2">
+                Elsewhere
+              </div>
+              <div className="flex gap-6 text-ink">
+                <a
+                  href="https://github.com/martinPandarski"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-flame transition"
+                >
+                  GitHub
+                </a>
+                <a
+                  href="https://bg.linkedin.com/in/martin-pandarski"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-flame transition"
+                >
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        <motion.div
+          {...fadeUp}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="md:col-span-5 md:col-start-8"
+        >
+          <ContactForm />
+        </motion.div>
+      </div>
+    </section>
+  </PageWrap>
+);
 
 export default Contacts;

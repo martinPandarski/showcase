@@ -1,21 +1,30 @@
-import React from "react";
-import "./App.scss";
-import Header from "./components/Header/Header";
-import Home from "./components/Home/Home";
-import { Routes, Route } from "react-router-dom";
-import About from "./components/About/About";
-import Contacts from "./components/Contacts/Contacts";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "motion/react";
+import Background from "./components/Background";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
+import Home from "./components/home/Home";
+import About from "./components/about/About";
+import Contacts from "./components/contacts/Contacts";
 
 const App: React.FC = () => {
+  const location = useLocation();
   return (
-    <main>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contacts" element={<Contacts />} />
-      </Routes>
-    </main>
+    <>
+      <Background />
+      <div className="grain-layer" />
+      <Nav />
+      <main className="relative z-10">
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contacts" element={<Contacts />} />
+          </Routes>
+        </AnimatePresence>
+        <Footer />
+      </main>
+    </>
   );
 };
 
