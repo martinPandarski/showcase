@@ -27,7 +27,7 @@ const Nav: React.FC = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.2, 0.7, 0.2, 1] }}
       className={clsx(
-        "fixed top-0 inset-x-0 z-40 px-6 md:px-10 py-5 flex items-center justify-between mono text-xs uppercase tracking-widest transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300",
+        "fixed top-0 inset-x-0 z-40 px-4 md:px-10 py-5 flex items-center justify-between gap-3 mono text-[11px] md:text-xs uppercase tracking-widest transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300",
         scrolled
           ? "bg-[#E5DFD2]/95 backdrop-blur-md border-b border-line shadow-[0_1px_0_rgba(10,10,11,0.04)]"
           : "bg-transparent border-b border-transparent"
@@ -36,7 +36,7 @@ const Nav: React.FC = () => {
       <NavLink to="/" className="text-ink text-base font-medium">
         MP<span className="text-flame">.</span>
       </NavLink>
-      <nav className="hidden md:flex items-center gap-8">
+      <nav className="flex items-center gap-5 md:gap-8">
         {links.map(({ to, label }) => (
           <NavLink
             key={to}
@@ -49,9 +49,9 @@ const Nav: React.FC = () => {
           </NavLink>
         ))}
       </nav>
-      <div className="flex items-center gap-3 text-muted">
+      <div className="flex items-center gap-2 md:gap-3 text-muted">
         <span className="inline-block w-1.5 h-1.5 rounded-full bg-flame pulse-dot" />
-        <span>Sofia · {time}</span>
+        <span><span className="hidden sm:inline">Sofia · </span>{time}</span>
       </div>
     </motion.header>
   );
